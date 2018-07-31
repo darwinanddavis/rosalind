@@ -6,10 +6,8 @@ Problem sets:
 http://rosalind.info/problems/tree-view/  
 
 Problems:  
-~~DNA~~  
-RNA  
 
-~~DNA	Counting DNA Nucleotides	33022  	 ~~
+~~DNA	Counting DNA Nucleotides	33022~~
 
 RNA	Transcribing DNA into RNA	29538	
  	 	 
@@ -217,7 +215,7 @@ LAFF	Local Alignment with Affine Gap Penalty	153
  	 	 
 OSYM	Isolating Symbols in Alignments	106	
  	 	 
-RSUB
+RSUB Identifying Reversing Substitutions  
 
 Files:  
 .R  
