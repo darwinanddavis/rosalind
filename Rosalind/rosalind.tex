@@ -1,0 +1,181 @@
+\documentclass[portrait]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+            pdftitle={Rosalind},
+            pdfauthor={1 Department of Biology, Emory University, 1510 Clifton Road NE, Atlanta, GA, USA, 30322},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{Rosalind}
+\providecommand{\subtitle}[1]{}
+\subtitle{Matthew Malishev\textsuperscript{1}*}
+\author{\emph{\textsuperscript{1} Department of Biology, Emory University, 1510
+Clifton Road NE, Atlanta, GA, USA, 30322} \footnote{`This Supplementary
+  Material can be found at
+  \url{https://github.com/darwinanddavis/rosalind}'}}
+\date{}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+Date: 2018-08-01\\
+R version: 3.5.0\\
+*Corresponding author:
+\href{mailto:matthew.malishev@gmail.com}{\nolinkurl{matthew.malishev@gmail.com}}
+
+\subsection{Overview}\label{overview}
+
+This document contains the code and solutions to the coding problem sets
+from the Rosalind database at
+\url{http://rosalind.info/problems/list-view/}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+~
+
+Install packages and set working dir
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# install pcks}
+\NormalTok{packages <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"stringr"}\NormalTok{)   }
+\ControlFlowTok{if}\NormalTok{ (}\KeywordTok{require}\NormalTok{(packages)) \{}
+  \KeywordTok{install.packages}\NormalTok{(packages,}\DataTypeTok{dependencies =}\NormalTok{ T)}
+  \KeywordTok{require}\NormalTok{(packages)}
+\NormalTok{\}}
+\KeywordTok{lapply}\NormalTok{(packages,library,}\DataTypeTok{character.only=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{}\label{section}
+
+\subsection{Problems}\label{problems}
+
+\subsubsection{DNA Counting DNA
+Nucleotides}\label{dna-counting-dna-nucleotides}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"rosalind_dna.txt"}\NormalTok{,}\DataTypeTok{header=}\NormalTok{F,}\DataTypeTok{sep=}\StringTok{","}\NormalTok{,}\DataTypeTok{stringsAsFactors =}\NormalTok{ F);s}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       V1
+## 1 AAGTGCTAGATCTGCGGGCCAACTCTCTATGACCCGAGACAGCCGCGGCTCTCTTACACCGTAGGCATGATCTTAAAGCAATGCCCCGGGTTTGGATACTTGCATTACTGGGGGTGCATGTGCCAGTACCAAATAACTTGGTGGGGCACCTTTTGCAGTACCGTTACACGGCCACCTTACGTCAAAAGTAATACTGGGGCGAGAATTGGGTGCCCGACAAAACCCCAATAGCATATCTGCATGATGCACGCACTGTGATAGTGGCGAGCAGTATCTTGACACATGACGATTGGGAGGCTCCCTTACCACCGCGATGGTCCAGAACTGGTATGTATTGCAATGCCGGTCCAGTAGAAGTTTCTTAACGGTAGGCCATTGGTGCCTGTCAGAAAATACCAAGCCTGCTGTTTGACCATGACGGGATAACTAGGGGTGCTTCTCCAGGTGAGGTGTACGAACTCTCCTCGTGGAGTTTTCCTCAGCAATCTCCTAACCACCACTTGCCCTAGTGATACCGGATCTTTCTCGGGACGACATGTCATTTGGACGCCGCTGTGACAGGACGAGTTCGTCGCTGCGGAACTCGTTACTTGTAATTCATCGGCTAGGTGCGGAACTGGGATATCATCCTATATTATCTCTACACCCAATCAGCCTATCTGAAGCACTAAAGCCCAGGGACCGCGTCACAATCTCCCGTCCTGAAGCCCGTTTTCAGGCACGCGCTTCAAGTGGAATACTCTACCCCAACGCCATTTGAACCCTCTAACACGGACTAATGGGGTTTTAGCGCCGCGGCAGTCCGATAACAGACCTTGGCTAAGATAGGTTGGCTGTA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str_count}\NormalTok{(s,}\KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{,}\StringTok{"C"}\NormalTok{,}\StringTok{"G"}\NormalTok{,}\StringTok{"T"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 199 224 210 205
+\end{verbatim}
+
+\subsubsection{RNA Transcribing DNA into
+RNA}\label{rna-transcribing-dna-into-rna}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# t <- read.csv(".csv",header=F,sep=",",stringsAsFactors = F);t}
+\CommentTok{# gsub("T","U",t)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{document}

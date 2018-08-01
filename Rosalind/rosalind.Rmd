@@ -7,15 +7,15 @@ author:
   ^['This Supplementary Material can be found at https://github.com/darwinanddavis/rosalind']
 #bibliography:/Users/malishev/Documents/Melbourne Uni/Thesis_2016/library.bib
 output:
+  pdf_document:
+    template: null
+    toc: yes
   html_document:
     code_folding: show
     depth: 3
     number_sections: no
     toc: yes
     toc_float: yes
-  pdf_document:
-    template: null
-    toc: yes
   word_document:
     highlight: tango
     keep_md: yes
@@ -36,8 +36,8 @@ params:
 classoption: portrait
 vignette: >
   %\VignetteIndexEntry{Rosalind problem set}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 <script type="text/x-mathjax-config">
@@ -65,7 +65,7 @@ setwd(params$dir) # working dir is set in yaml header
 ```
 
 Install packages and set working dir  
-```{r, cache = TRUE, tidy = TRUE, lazy = TRUE, results="hide"}
+```{r, results="hide"}
 # install pcks
 packages <- c("stringr")   
 if (require(packages)) {
@@ -87,6 +87,7 @@ str_count(s,c("A","C","G","T"))
 
 ### RNA	Transcribing DNA into RNA  
 ```{r}
-
+# t <- read.csv(".csv",header=F,sep=",",stringsAsFactors = F);t
+# gsub("T","U",t)
 ```
 
