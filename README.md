@@ -9,7 +9,7 @@ Problems:
 
 ~~DNA	Counting DNA Nucleotides	33022~~
 
-RNA	Transcribing DNA into RNA	29538	
+~RNA	Transcribing DNA into RNA	29538~	
  	 	 
 REVC	Complementing a Strand of DNA	26761	
  	 	 
