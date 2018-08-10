@@ -6,25 +6,45 @@ author:
   <!-- _^2^ _ -->
   ^['This Supplementary Material can be found at https://github.com/darwinanddavis/rosalind']
 #bibliography:/Users/malishev/Documents/Melbourne Uni/Thesis_2016/library.bib
+fontsize: 10
+geometry: margin=1in
+documentclass: article
+linkcolor: blue
+urlcolor: blue
+citecolor: red
 output:
+  html_document:
+    css: # custom.css
+    highlight: tango
+    code_folding: show
+    toc: yes
+    toc_depth: 3
+    number_sections: no
+    toc_float: yes
   pdf_document:
+    includes:
+      in_header: # add .tex file with header content
+    highlight: tango
     template: null
     toc: yes
-  html_document:
-    code_folding: show
-    depth: 3
-    number_sections: no
-    toc: yes
-    toc_float: yes
+    toc_depth: 3
+    number_sections: false
+    fig_width: 6
+    fig_height: 5
+    fig_caption: true
+    df_print: tibble 
+    citation_package: biblatex # natbib
+    latex_engine: pdflatex #xelatex  # lualatex
+    keep_tex: true # keep .tex file in dir 
   word_document:
     highlight: tango
     keep_md: yes
     pandoc_args: --smart
     #reference: mystyles.docx
     toc: yes
-includes:
+inludes:
   before_body: before_body.tex
-subtitle: Matthew Malishev^1^*
+subtitle: 
 tags:
 - nothing
 - nothingness
@@ -32,12 +52,14 @@ params:
   date: !r Sys.Date()
   version: !r getRversion()
   email: "matthew.malishev@gmail.com"
-  dir: "/Users/malishev/Documents/Data/Rosalind/Rosalind/"
+  dir: "/Users/malishev/Documents/Data/Rosalind/Rosalind"
+  doi: https://github.com/darwinanddavis/Rosalind
 classoption: portrait
 vignette: >
   %\VignetteIndexEntry{Rosalind problem set}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
+# ^['https://github.com/darwinanddavis/Rosalind'] # footnote
 ---
 
 <script type="text/x-mathjax-config">
@@ -50,9 +72,13 @@ knitr::opts_chunk$set(
 )
 ```
 
+\  
+
 Date: `r params$date`  
 R version: `r params$version`   
 *Corresponding author: `r params$email`  
+
+\newpage   
 
 ## Overview     
 This document contains the code and solutions to the coding problem sets from the Rosalind database at http://rosalind.info/problems/list-view/  
@@ -67,7 +93,7 @@ setwd(params$dir) # working dir is set in yaml header
 Install packages and set working dir  
 ```{r, results="hide"}
 # install pcks
-packages <- c("stringr")   
+packages <- c("stringr","stringi","gsubfn")   
 if (require(packages)) {
   install.packages(packages,dependencies = T)
   require(packages)
@@ -87,7 +113,21 @@ str_count(s,c("A","C","G","T"))
 
 ### RNA	Transcribing DNA into RNA  
 ```{r}
-# t <- read.csv(".csv",header=F,sep=",",stringsAsFactors = F);t
-# gsub("T","U",t)
+t <- read.csv("rosalind_rna.txt",header=F,sep=",",stringsAsFactors = F);t
+gsub("T","U",t)
 ```
+### Complementing a Strand of DNA  
+```{r}
+require(stringi)
+require(gsubfn)
 
+# s <- read.csv(".txt",header=F,sep=",",stringsAsFactors = F);s
+
+s <- "AAAACCCGGT"
+sc <- c("A","T","C","G") # target units
+sc2r <- c("T","A","G","C") # units to be replaced
+s <- stringi::stri_reverse(s);s # reverse string
+s <- replace(s,sc,sc2r);s # replace 
+
+# desired result: ACCGGGTTTT
+```

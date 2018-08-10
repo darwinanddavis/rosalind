@@ -1,4 +1,4 @@
-\documentclass[portrait]{article}
+\documentclass[10,portrait]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -23,12 +23,18 @@
 }{}
 \PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
 \usepackage[unicode=true]{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
 \hypersetup{
             pdftitle={Rosalind},
             pdfauthor={1 Department of Biology, Emory University, 1510 Clifton Road NE, Atlanta, GA, USA, 30322},
-            pdfborder={0 0 0},
+            colorlinks=true,
+            linkcolor=blue,
+            citecolor=red,
+            urlcolor=blue,
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage[]{biblatex}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -96,8 +102,6 @@
 
 
 \title{Rosalind}
-\providecommand{\subtitle}[1]{}
-\subtitle{Matthew Malishev\textsuperscript{1}*}
 \author{\emph{\textsuperscript{1} Department of Biology, Emory University, 1510
 Clifton Road NE, Atlanta, GA, USA, 30322} \footnote{`This Supplementary
   Material can be found at
@@ -108,13 +112,18 @@ Clifton Road NE, Atlanta, GA, USA, 30322} \footnote{`This Supplementary
 \maketitle
 
 {
-\setcounter{tocdepth}{2}
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{3}
 \tableofcontents
 }
-Date: 2018-08-01\\
+~
+
+Date: 2018-08-10\\
 R version: 3.5.0\\
 *Corresponding author:
 \href{mailto:matthew.malishev@gmail.com}{\nolinkurl{matthew.malishev@gmail.com}}
+
+\newpage   
 
 \subsection{Overview}\label{overview}
 
@@ -131,7 +140,7 @@ Install packages and set working dir
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# install pcks}
-\NormalTok{packages <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"stringr"}\NormalTok{)   }
+\NormalTok{packages <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"stringr"}\NormalTok{,}\StringTok{"stringi"}\NormalTok{,}\StringTok{"gsubfn"}\NormalTok{)   }
 \ControlFlowTok{if}\NormalTok{ (}\KeywordTok{require}\NormalTok{(packages)) \{}
   \KeywordTok{install.packages}\NormalTok{(packages,}\DataTypeTok{dependencies =}\NormalTok{ T)}
   \KeywordTok{require}\NormalTok{(packages)}
@@ -154,8 +163,10 @@ Nucleotides}\label{dna-counting-dna-nucleotides}
 \end{Shaded}
 
 \begin{verbatim}
-##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       V1
-## 1 AAGTGCTAGATCTGCGGGCCAACTCTCTATGACCCGAGACAGCCGCGGCTCTCTTACACCGTAGGCATGATCTTAAAGCAATGCCCCGGGTTTGGATACTTGCATTACTGGGGGTGCATGTGCCAGTACCAAATAACTTGGTGGGGCACCTTTTGCAGTACCGTTACACGGCCACCTTACGTCAAAAGTAATACTGGGGCGAGAATTGGGTGCCCGACAAAACCCCAATAGCATATCTGCATGATGCACGCACTGTGATAGTGGCGAGCAGTATCTTGACACATGACGATTGGGAGGCTCCCTTACCACCGCGATGGTCCAGAACTGGTATGTATTGCAATGCCGGTCCAGTAGAAGTTTCTTAACGGTAGGCCATTGGTGCCTGTCAGAAAATACCAAGCCTGCTGTTTGACCATGACGGGATAACTAGGGGTGCTTCTCCAGGTGAGGTGTACGAACTCTCCTCGTGGAGTTTTCCTCAGCAATCTCCTAACCACCACTTGCCCTAGTGATACCGGATCTTTCTCGGGACGACATGTCATTTGGACGCCGCTGTGACAGGACGAGTTCGTCGCTGCGGAACTCGTTACTTGTAATTCATCGGCTAGGTGCGGAACTGGGATATCATCCTATATTATCTCTACACCCAATCAGCCTATCTGAAGCACTAAAGCCCAGGGACCGCGTCACAATCTCCCGTCCTGAAGCCCGTTTTCAGGCACGCGCTTCAAGTGGAATACTCTACCCCAACGCCATTTGAACCCTCTAACACGGACTAATGGGGTTTTAGCGCCGCGGCAGTCCGATAACAGACCTTGGCTAAGATAGGTTGGCTGTA
+## # A tibble: 1 x 1
+##   V1                                                                      
+##   <chr>                                                                   
+## 1 AAGTGCTAGATCTGCGGGCCAACTCTCTATGACCCGAGACAGCCGCGGCTCTCTTACACCGTAGGCATGAT~
 \end{verbatim}
 
 \begin{Shaded}
@@ -173,9 +184,65 @@ RNA}\label{rna-transcribing-dna-into-rna}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# t <- read.csv(".csv",header=F,sep=",",stringsAsFactors = F);t}
-\CommentTok{# gsub("T","U",t)}
+\NormalTok{t <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"rosalind_rna.txt"}\NormalTok{,}\DataTypeTok{header=}\NormalTok{F,}\DataTypeTok{sep=}\StringTok{","}\NormalTok{,}\DataTypeTok{stringsAsFactors =}\NormalTok{ F);t}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 1
+##   V1                                                                      
+##   <chr>                                                                   
+## 1 GAACGAGGAACGTCTTGCCACCATCCGATCTGAAACGGCAGGTACGTTTACAAAGTTCTCCAGTGTAAAAC~
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{gsub}\NormalTok{(}\StringTok{"T"}\NormalTok{,}\StringTok{"U"}\NormalTok{,t)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "GAACGAGGAACGUCUUGCCACCAUCCGAUCUGAAACGGCAGGUACGUUUACAAAGUUCUCCAGUGUAAAACACGGUGCGGUGAAGAGUUCCCAAUCCAGGGAGCCUUCAAAGAGACCAAUUUGGCUGUUCGGGCUUCGAUCCACGCGAUCUUGGAAUGCAGUCACGCCAUAGGAUAGCCGACACUUUGGAUGGAGCCUAAAGUCCAAGACGCCGUUUUACCGGCUCAUUAGGUACGUGACUAUAGACGCUACGCGGUCGGUUCCAUAGUUCCUGUCCUGGCAUCGAGGGGUGUCGACCAGUAAAUCCGUUUGCUCACCACCAAGGUCUUCGUAUAUCCAUGCGCGUGAACGGCGGUGAAAGUGAAACCAUAGGGCGCCCGGCGGGCAACGUAGCGUUCAUACCUAUUCCUGCGUCUCUGAAAAUCGCGACAUAGGUAGGCCCCACGUACGGUAUAUUUCCUAGCCUACGCCUGUUUAUACCCGCGCGGAUUGGGGGAAGAAUAUGUGUUCUGAAAAAGAGUAAAAUGUUGGGCUACGGUCGAGCCUAAAGACAGCAGGCCGCUCCCUAUCCUCUGGCCGACGUACGUUUGUUGUCUAUUGGUGAAACUCAUUCAAGAUUGCGCAUUCAAUCACACAGUAUGUUAUGUAUUAGAAAAGAUCUGCGUAUAUCCGCUCAACGUUACAACUGCAUUUCAAGAUGUACUACAUAGUGGAUGCACUGAACCAUAGCGGCCGUCCUAGCUAAGGAAAUGAUAAUACCCGCUACGGACUUCAUUACAAGACUGUGCAUCAGCAGUUACUAGGUAGCUUUUUCGCGGUUCCAAUAAACAUUGCGAUGGCGACAGAGUCUGCACAAAAAGCUAACGACUGCACAUUUGUCUGAGCAAACGGAUUAUAGGUAACAGCAUGUAGCGGCGCUACAAACCGGUGCGUUCUAAG"
+\end{verbatim}
+
+\subsubsection{Complementing a Strand of
+DNA}\label{complementing-a-strand-of-dna}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(stringi)}
+\KeywordTok{require}\NormalTok{(gsubfn)}
+
+\CommentTok{# s <- read.csv(".txt",header=F,sep=",",stringsAsFactors = F);s}
+
+\NormalTok{s <-}\StringTok{ "AAAACCCGGT"}
+\NormalTok{sc <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{,}\StringTok{"T"}\NormalTok{,}\StringTok{"C"}\NormalTok{,}\StringTok{"G"}\NormalTok{) }\CommentTok{# target units}
+\NormalTok{sc2r <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"T"}\NormalTok{,}\StringTok{"A"}\NormalTok{,}\StringTok{"G"}\NormalTok{,}\StringTok{"C"}\NormalTok{) }\CommentTok{# units to be replaced}
+\NormalTok{s <-}\StringTok{ }\NormalTok{stringi}\OperatorTok{::}\KeywordTok{stri_reverse}\NormalTok{(s);s }\CommentTok{# reverse string}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "TGGCCCAAAA"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s <-}\StringTok{ }\KeywordTok{replace}\NormalTok{(s,sc,sc2r);s }\CommentTok{# replace }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                         A            T            C            G 
+## "TGGCCCAAAA"          "T"          "A"          "G"          "C"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# desired result: ACCGGGTTTT}
+\end{Highlighting}
+\end{Shaded}
+
+\printbibliography
 
 \end{document}
